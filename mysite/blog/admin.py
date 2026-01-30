@@ -10,7 +10,7 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [CommentInLine]
     readonly_fields = ['created']
     list_filter = ['author', 'created']
-    search_fields = ['title', 'content', 'author__']
+    search_fields = ['title', 'content', 'author__username']
 
     fieldsets = [
         ('General', {'fields': ('title', 'content', 'author', 'created')}),
