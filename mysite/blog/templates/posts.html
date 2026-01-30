@@ -2,5 +2,5 @@
 <h1>{{ post.title }}</h1>
 <small>{{ post.created }}, {{ post.author }}</small>
 <p>{{ post.content }}</p>
-<p>Komentarų: {{ post.comments_count }}</p>
+<p>Komentarų: {{ post.comments.count }}</p>
 {% endfor %}
