@@ -1,6 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% for post in posts %}
-<h1>{{ post.title }}</h1>
-<small>{{ post.created }}, {{ post.author }}</small>
-<p>{{ post.content }}</p>
-<p>Komentarų: {{ post.comments.count }}</p>
+<article>
+    <header class="mb-4">
+        <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
+        <div class="text-muted fst-italic mb-2">Posted on {{ post.created }} by {{ post.author }}</div>
+    </header>
+    <section class="mb-5">
+        <p class="fs-5 mb-4">{{ post.content }}</p>
+        <p>Comments: {{ post.comments.count }}</p>
+    </section>
+</article>
 {% endfor %}
+{% endblock %}
+
+<!--{% for post in posts %}-->
+<!--<h1>{{ post.title }}</h1>-->
+<!--<small>{{ post.created }}, {{ post.author }}</small>-->
+<!--<p>{{ post.content }}</p>-->
+<!--<p>Komentarų: {{ post.comments.count }}</p>-->
+<!--{% endfor %}-->

@@ -3,6 +3,6 @@ from .models import Post
 
 def posts(request):
     context = {
-        'posts': Post.objects.all(),
+        'posts': Post.objects.order_by("-pk"),
     }
     return render(request, template_name="posts.html", context=context)
