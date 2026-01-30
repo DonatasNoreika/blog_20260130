@@ -10,6 +10,9 @@ class Post(models.Model):
                                null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    def comments_count(self):
+        return self.comments.count()
+
     def __str__(self):
         return self.title
 
