@@ -5,10 +5,10 @@
 <article>
     <header class="mb-4">
         <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
-        <div class="text-muted fst-italic mb-2">Posted on {{ post.created }} by {{ post.author }}</div>
+        <div class="text-muted fst-italic mb-2">Posted on {{ post.created }} by {{ post.author.first_name }} {{ post.author.last_name }}</div>
     </header>
     <section class="mb-5">
-        <p class="fs-5 mb-4">{{ post.content }}</p>
+        <p class="fs-5 mb-4">{{ post.content | truncatewords:"30" }} <a href="{% url 'post' post.pk %}">Read more</a></p>
         <p>Comments: {{ post.comments.count }}</p>
     </section>
 </article>
