@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Mano komentarai{% endblock %}
+
+{% block content %}
+<h1>Mano komentarai:</h1>
+<br>
+{% for comment in comments %}
+<p>Data: {{ comment.created }}</p>
+<p>Turinys: {{ comment.content }}</p>
+<p>Įrašas: <a href="{% url 'post' comment.post.pk %}">{{ comment.post.title }}</a></p>
+<hr>
+{% empty %}
+<p>Įrašų neradome</p>
+{% endfor %}
+{% endblock %}
