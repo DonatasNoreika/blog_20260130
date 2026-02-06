@@ -11,7 +11,7 @@
                     <a class="nav-link" href="{% url 'posts' %}">PRADŽIA</a>
                 </li>
                 {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="#">
+                <li class="nav-item"><a class="nav-link" href="">
                     <svg class="bi bi-person" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -19,6 +19,9 @@
                               clip-rule="evenodd"/>
                     </svg>
                     {{ user.get_username }}</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'userposts' %}">Mano įrašai</a>
+                </li>
                 <li class="nav-item">
                     <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
