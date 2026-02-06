@@ -8,7 +8,7 @@
         </div>
     </header>
     <section class="mb-5">
-        <p class="fs-5 mb-4">{{ post.content }}</p>
+        <p class="fs-5 mb-4">{{ post.content | safe }}</p>
         <p>Comments: {{ post.comments.count }}</p>
     </section>
     <!-- Comments -->
