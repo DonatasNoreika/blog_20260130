@@ -10,6 +10,7 @@ class Post(models.Model):
                                on_delete=models.SET_NULL,
                                null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    cover = models.ImageField(upload_to='covers', null=True, blank=True)
 
     def __str__(self):
         return self.title

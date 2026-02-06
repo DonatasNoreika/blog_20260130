@@ -13,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content', 'author__username']
 
     fieldsets = [
-        ('General', {'fields': ('title', 'content', 'author', 'created')}),
+        ('General', {'fields': ('title', 'content', 'author', 'created', 'cover')}),
     ]
 
 admin.site.register(Post, PostAdmin)

@@ -7,6 +7,11 @@
         <div class="text-muted fst-italic mb-2">Posted on {{ post.created }} by {{ post.author.first_name }} {{ post.author.last_name }}
         </div>
     </header>
+    <div>
+        {% if post.cover %}
+        <img src="{{ post.cover.url }}" class="card-img-top" alt="...">
+        {% endif %}
+    </div>
     <section class="mb-5">
         <p class="fs-5 mb-4">{{ post.content | safe }}</p>
         <p>Comments: {{ post.comments.count }}</p>
