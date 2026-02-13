@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Ar tikrai norite ištrinti komentarą "{{ comment.content }}"?</p>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-primary">TAIP</button>
+    <a class="btn btn-secondary" href="{% url 'post' comment.post.pk %}">NE</a>
+</form>
+{% endblock %}
