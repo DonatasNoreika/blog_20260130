@@ -16,10 +16,13 @@
         <img src="{{ post.cover.url }}" class="card-img-top" alt="...">
         {% endif %}
     </div>
-    <section class="mb-5">
+    <section >
         <p class="fs-5 mb-4">{{ post.content | safe }}</p>
         <p>Comments: {{ post.comments.count }}</p>
     </section>
+    <div class="mb-2">
+        <a href="{% url 'post_update' post.pk %}" class="btn btn-warning">Redaguoti</a>
+    </div>
     <!-- Comments -->
     <!-- Comment form-->
     <form class="mb-4" method="post">
