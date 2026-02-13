@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from django.views.generic.edit import FormMixin
 from .models import Post, Comment
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .forms import UserChangeForm, ProfileChangeForm
+from .forms import UserChangeForm, ProfileChangeForm, PostCommentForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
@@ -25,10 +26,28 @@ def posts(request):
     return render(request, template_name="posts.html", context=context)
 
 
-class PostDetailView(generic.DetailView):
+class PostDetailView(FormMixin, generic.DetailView):
     model = Post
     template_name = "post.html"
     context_object_name = "post"
+    form_class = PostCommentForm
+
+    def get_success_url(self):
+        return reverse("post", kwargs={"pk": self.object.id})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.post = self.get_object()
+        form.instance.author = self.request.user
+        form.save()
+        return super().form_valid(form)
 
 
 def search(request):

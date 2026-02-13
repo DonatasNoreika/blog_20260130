@@ -1,6 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Comment
+
+class PostCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
 
 class UserChangeForm(forms.ModelForm):
     class Meta:

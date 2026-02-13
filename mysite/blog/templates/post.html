@@ -21,6 +21,15 @@
         <p>Comments: {{ post.comments.count }}</p>
     </section>
     <!-- Comments -->
+    <!-- Comment form-->
+    <form class="mb-4" method="post">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+        {{ form | crispy }}
+        <button type="submit" class="btn btn-primary">Paskelbti</button>
+<!--            <textarea class="form-control" rows="3"-->
+<!--                                     placeholder="Join the discussion and leave a comment!"></textarea>-->
+    </form>
     {% for comment in post.comments.all %}
     <div class="d-flex mb-4">
         <!-- Parent comment-->
