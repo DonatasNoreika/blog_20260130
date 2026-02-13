@@ -6,7 +6,13 @@ from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .forms import UserChangeForm, ProfileChangeForm
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
 
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    template_name = "signup.html"
+    success_url = reverse_lazy("login")
 
 def posts(request):
     posts = Post.objects.order_by("-pk")
@@ -75,3 +81,5 @@ def profile(request):
         "p_form": p_form,
     }
     return render(request, template_name="profile.html", context=context)
+
+
