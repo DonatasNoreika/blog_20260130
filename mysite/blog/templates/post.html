@@ -4,7 +4,11 @@
 <article>
     <header class="mb-4">
         <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
-        <div class="text-muted fst-italic mb-2">Posted on {{ post.created }} by {{ post.author.first_name }} {{ post.author.last_name }}
+        <div class="text-muted fst-italic mb-2">
+            {% if post.author.profile.photo %}
+            <img src="{{ post.author.profile.photo.url }}" class="rounded-circle" style="width: 30px">
+            {% endif %}
+            Posted on {{ post.created }} by {{ post.author.first_name }} {{ post.author.last_name }} ({{ post.author.username }})
         </div>
     </header>
     <div>
@@ -24,7 +28,12 @@
 <!--                                        src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"-->
 <!--                                        alt="..."/></div>-->
         <div class="ms-3">
-            <div class="fw-bold">{{ comment.author }}, {{ comment.created | date:"Y-m-d" }}</div>
+            <div class="fw-bold">
+                {% if comment.author.profile.photo %}
+                <img src="{{ comment.author.profile.photo.url }}" class="rounded-circle" style="width: 30px">
+                {% endif %}
+                {{ comment.author }}, {{ comment.created | date:"Y-m-d" }}
+            </div>
             {{ comment.content }}
         </div>
     </div>

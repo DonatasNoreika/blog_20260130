@@ -5,7 +5,12 @@
 <article>
     <header class="mb-4">
         <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
-        <div class="text-muted fst-italic mb-2">Posted on {{ post.created }} by {{ post.author.first_name }} {{ post.author.last_name }}</div>
+        <div class="text-muted fst-italic mb-2">
+            {% if post.author.profile.photo %}
+            <img src="{{ post.author.profile.photo.url }}" class="rounded-circle" style="width: 30px">
+            {% endif %}
+            Posted on {{ post.created }} by {{ post.author.first_name }} {{ post.author.last_name }} ({{ post.author.username }})
+        </div>
     </header>
     <div>
         {% if post.cover %}

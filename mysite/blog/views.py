@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post, Comment
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from .forms import UserChangeForm, ProfileChangeForm
+
 
 def posts(request):
     posts = Post.objects.order_by("-pk")
@@ -32,7 +35,6 @@ def search(request):
         Q(author__first_name__icontains=query) |
         Q(author__last_name__icontains=query))
 
-
     context = {
         "query": query,
         "posts": posts,
@@ -56,3 +58,20 @@ class UserCommentListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Comment.objects.filter(author=self.request.user)
+
+
+@login_required
+def profile(request):
+    u_form = UserChangeForm(request.POST or None, instance=request.user)
+    p_form = ProfileChangeForm(request.POST or None, request.FILES, instance=request.user.profile)
+
+    if u_form.is_valid() and p_form.is_valid():
+        u_form.save()
+        p_form.save()
+        return redirect("profile")
+
+    context = {
+        "u_form": u_form,
+        "p_form": p_form,
+    }
+    return render(request, template_name="profile.html", context=context)

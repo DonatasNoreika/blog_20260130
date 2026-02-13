@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Vartotojo profilis</h1>
+{% if user.profile.photo %}
+<img src="{{ user.profile.photo.url }}" class="rounded-circle">
+{% endif %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ u_form | crispy }}
+    {{ p_form | crispy }}
+    <button class="btn btn-secondary" type="submit">Išsaugoti</button>
+</form>
+
+{% endblock %}
