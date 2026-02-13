@@ -50,6 +50,12 @@
                 {{ comment.author }}, {{ comment.created | date:"Y-m-d" }}
             </div>
             {{ comment.content }}
+            {% if comment.author == user %}
+            <div class="mb-2">
+                <a href="{% url 'comment_update' comment.pk %}" class="btn btn-warning btn-sm">Redaguoti</a>
+                <a href="" class="btn btn-danger btn-sm">Ištrinti</a>
+            </div>
+            {% endif %}
         </div>
     </div>
     {% endfor %}
