@@ -20,9 +20,12 @@
         <p class="fs-5 mb-4">{{ post.content | safe }}</p>
         <p>Comments: {{ post.comments.count }}</p>
     </section>
+    {% if post.author == user %}
     <div class="mb-2">
         <a href="{% url 'post_update' post.pk %}" class="btn btn-warning">Redaguoti</a>
+        <a href="{% url 'post_delete' post.pk %}" class="btn btn-danger">Ištrinti</a>
     </div>
+    {% endif %}
     <!-- Comments -->
     <!-- Comment form-->
     <form class="mb-4" method="post">
