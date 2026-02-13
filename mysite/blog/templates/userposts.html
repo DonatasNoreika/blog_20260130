@@ -3,6 +3,9 @@
 {% block title %}Mano įrašai{% endblock %}
 
 {% block content %}
+<div>
+    <a class="btn btn-primary" href="{% url 'post_create' %}">Naujas</a>
+</div>
 <h1>Mano įrašai:</h1>
 <br>
 {% for post in posts %}

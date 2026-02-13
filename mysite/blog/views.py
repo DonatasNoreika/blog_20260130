@@ -102,3 +102,14 @@ def profile(request):
     return render(request, template_name="profile.html", context=context)
 
 
+class PostCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Post
+    template_name = "form.html"
+    fields = ['title', 'content', 'cover']
+    success_url = reverse_lazy('userposts')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.save()
+        return super().form_valid(form)
+
