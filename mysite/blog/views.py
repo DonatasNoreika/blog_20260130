@@ -17,7 +17,7 @@ class SignUpView(generic.CreateView):
 
 def posts(request):
     posts = Post.objects.order_by("-pk")
-    paginator = Paginator(posts, per_page=2)
+    paginator = Paginator(posts, per_page=6)
     page_number = request.GET.get('page')
     paged_posts = paginator.get_page(page_number)
     context = {
